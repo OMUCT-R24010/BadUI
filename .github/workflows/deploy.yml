@@ -1,0 +1,67 @@
+# ワークフローの名前
+name: Deploy Vite App to GitHub Pages
+
+# 実行するトリガー (mainブランチにプッシュされた時)
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # Actions タブから手動実行も許可
+
+# デプロイに必要な権限
+permissions:
+  contents: read
+  pages: write      # GitHub Pages へのデプロイ権限
+  id-token: write # OIDCトークンへの書き込み権限
+
+# 実行するジョブ
+jobs:
+  # ビルド用ジョブ
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. ソースコードをチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Node.js をセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # 20.x を使用
+
+      # 3. pnpm をセットアップ
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9 # pnpm バージョン 9 を使用
+
+      # 4. 依存パッケージをインストール
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 5. アプリをビルド (Vite は 'dist' フォルダに出力)
+      - name: Build
+        run: pnpm run build
+
+      # 6. Pages 用のアーティファクト(成果物)を設定
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 7. ビルド結果 (dist フォルダ) をアーティファクトとしてアップロード
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist' # Vite のビルド出力フォルダ
+
+  # デプロイ用ジョブ
+  deploy:
+    needs: build # build ジョブの完了を待つ
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # デプロイ先のURLを出力
+    steps:
+      # 8. アーティファクトを GitHub Pages にデプロイ
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
