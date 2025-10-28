@@ -33,7 +33,7 @@ export const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNext }
           <div className="space-y-4 text-sm text-gray-700">
             <h3 className="font-bold text-lg">第1条（目的）</h3>
             <p>
-              本利用規約は、当社が提供するサービス（以下「本サービス」といいます）の利用条件を定めるものです。
+              本利用規約は、当ページが提供するサービス（以下「本サービス」といいます）の利用条件を定めるものです。
               登録ユーザーの皆さま（以下「ユーザー」といいます）には、本利用規約に従って、本サービスをご利用いただきます。
             </p>
             
@@ -47,7 +47,7 @@ and we shall not be obligated to disclose the reasons for this.
             <h3 className="font-bold text-lg">第3条（ユーザーIDおよびパスワードの管理）</h3>
             <p>
               ユーザーは、自己の責任において、本サービスのユーザーIDおよびパスワードを管理するものとします。
-              ユーザーは、いかなる場合にも、ユーザーIDおよびパスワードを第三者に譲渡または貸与することはできません。
+              ユーザーは、いかなる場合にも、ユーザーIDおよびパスワードを第三者に譲渡または貸与することができます。
             </p>
             
             <h3 className="font-bold text-lg">第4条（禁止事項）</h3>
@@ -66,6 +66,11 @@ and we shall not be obligated to disclose the reasons for this.
             <p>
               当社は、以下のいずれかの事由があると判断した場合、ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。
             </p>
+            <ul className="list-disc list-inside pl-4 space-y-2">
+              <li>ユーザーが法令または公序良俗に違反する行為を行った場合</li>
+              <li>ユーザーが必要な情報の入力を正しく行わなかった場合</li>
+              <li>ユーザーがページを再読み込みした場合</li>
+            </ul>
             
             <h3 className="font-bold text-lg">第6条（著作権）</h3>
             <p>

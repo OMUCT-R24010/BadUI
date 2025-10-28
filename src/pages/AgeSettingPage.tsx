@@ -151,8 +151,7 @@ export const AgeSettingPage: React.FC<AgeSettingPageProps> = ({ onNext }) => {
           <p><strong>注意事項:</strong></p>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>年齢と生年月日が一致している必要があります</li>
-            <li>生年月日は1909年8月21日以降である必要があります</li>
-            <li>生年月日は今日より前である必要があります</li>
+            <li>生年月日は正しい範囲内にある必要があります</li>
             <li>条件を満たさない場合、最初からやり直しになります</li>
           </ul>
         </div>
